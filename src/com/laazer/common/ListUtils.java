@@ -22,11 +22,11 @@ public class ListUtils {
     }
     
     
-    public static <K, T> T fold(T base, BinFunction<T, T> f, List<K> list, UniFunction<K, T> transform) {
+    public static <K, T> T fold(T base, BinFunction<T, K, T> f, List<K> list) {
         if(list.isEmpty()) {return base;}
         else {
             K tmp = list.remove(0);
-            return fold(f.apply(base, transform.apply(tmp)), f, list, transform);
+            return fold(f.apply(base, tmp), f, list);
         }
     }
     

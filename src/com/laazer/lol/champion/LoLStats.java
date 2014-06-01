@@ -2,7 +2,6 @@ package com.laazer.lol.champion;
 
 import org.json.JSONObject;
 import com.google.gson.*;
-
 import com.laazer.lol.LoLObject;
 
 public class LoLStats extends LoLObject{

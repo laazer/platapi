@@ -4,18 +4,18 @@ import java.util.Set;
 import java.util.List;
 import com.laazer.lol.LoLObject;
 
-public class LoLMasteryPages implements LoLObject{
+public class LoLMasteryPages extends LoLObject{
     Set<LoLMasteryPage> pages;
     Long summonerId;
 }
 
-class LoLMasteryPage implements LoLObject {
+class LoLMasteryPage extends LoLObject {
     boolean current;
     Long id;
     List<LoLMastery> masteries;
     String name;
 }
 
-class LoLMastery implements LoLObject {
+class LoLMastery extends LoLObject {
     int id, rank;
 }
