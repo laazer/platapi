@@ -39,7 +39,10 @@ public abstract class Box <T>{
         return new Empty();
     }
     public static <K> Box<K> fill(K cat) {
+       try { 
         return new Full<K>(cat);
+       }
+       catch(Exception e){return Box.EMPTY;}
     }
 }
 

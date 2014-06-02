@@ -7,8 +7,8 @@ import com.google.gson.Gson;
 public class LoLBlockItem {
     int count, id;
     
-    public LoLBlockItem genBlockItem(JSONObject jobj) {
+    public static LoLBlockItem genBlockItem(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLBlockItem().getClass());
     }
 }

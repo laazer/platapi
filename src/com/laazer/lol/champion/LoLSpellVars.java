@@ -10,9 +10,9 @@ public class LoLSpellVars extends LoLObject{
     String dyn, key, link, ranksWith;
     public LoLSpellVars() {}
     
-    public LoLSpellVars genSpellVars(JSONObject jobj) {
+    public static LoLSpellVars genSpellVars(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLSpellVars().getClass());
     }
     
 }

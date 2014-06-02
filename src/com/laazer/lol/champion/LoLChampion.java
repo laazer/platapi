@@ -18,7 +18,7 @@ import com.laazer.lol.Region;
 import java.lang.Class;
 
 public class LoLChampion extends LoLObject{
-    final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/?";
+    final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
     int id;
     boolean freeToPlay;
     String key, name, title, blurb, lore, partype;;
@@ -28,7 +28,7 @@ public class LoLChampion extends LoLObject{
     LoLPassive passive;
     List<LoLRecommended> recommended;
     List<LoLSkin> skins;
-    List<LoLChampSpell> spells;
+    List<Box<LoLChampSpell>> spells;
     LoLStats stats;
     
     LoLChampion() {
@@ -38,7 +38,9 @@ public class LoLChampion extends LoLObject{
     private static JSONObject generateJson(int id) {
         //TODO make url an input
         JSONParser parser = new JSONParser();
-        JSONObject jobj = (JSONObject) parser.parseJson(UrlManager.executeGet(LocURL + id + "champData=all&" + LoLObject.KEY).get());
+        String url = LocURL + id + "?champData=all&" + LoLObject.KEY;
+        System.out.println(url);
+        JSONObject jobj = (JSONObject) parser.parseJson(UrlManager.executeGet(url).get());
         return jobj;
     }
     
@@ -51,7 +53,7 @@ public class LoLChampion extends LoLObject{
             champ.title = obj.getString("title"); champ.blurb = obj.getString("blurb"); 
             champ.allyTips = JSONUtils.mappedList(obj.getJSONArray("allytips"), Functions.toString);
             champ.enemyTips = JSONUtils.mappedList(obj.getJSONArray("enemytips"), Functions.toString);
-            champ.image = new LoLImage().genImage(obj.getJSONObject("image")); 
+            champ.image = LoLImage.genImage(obj.getJSONObject("image")); 
             champ.lore = obj.getString("lore");
             champ.recommended = JSONUtils.mappedList(obj.getJSONArray("recommended"), LoLUtils.toRecommended);
             champ.passive = new LoLPassive(obj.getJSONObject("passive"));

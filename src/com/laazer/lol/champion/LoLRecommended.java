@@ -18,8 +18,8 @@ public class LoLRecommended extends LoLObject{
         // TODO Auto-generated constructor stub
     }
     
-    public LoLRecommended genLoLRecommened(JSONObject jobj) {
+    public static LoLRecommended genLoLRecommened(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLRecommended().getClass());
     }
 }

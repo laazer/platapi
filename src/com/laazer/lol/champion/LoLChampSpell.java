@@ -35,28 +35,32 @@ public class LoLChampSpell extends LoLObject{
     
     public LoLChampSpell() {}
     
-    public LoLChampSpell genChampSpell(JSONObject obj) throws JSONException {
-        LoLChampSpell cs = new LoLChampSpell();
-        cs.altImages = JSONUtils.mappedList(obj.getJSONArray("altimages"), LoLUtils.toImage);
-        cs.cooldown = JSONUtils.mappedList(obj.getJSONArray("cooldown"), Functions.toDouble);
-        cs.coolDownBurn = obj.getString("cooldownburn");
-        cs.costBurn = obj.getString("costburn");
-        cs.description = obj.getString("description");
-        cs.effect = JSONUtils.mappedList(obj.getJSONArray("effect"), ListUtils.toIntList);
-        cs.effectBurn = JSONUtils.mappedList(obj.getJSONArray("effectburn"), Functions.toString);
-        cs.image = new LoLImage().genImage(obj.getJSONObject("image"));
-        cs.key = obj.getString("key");
-        cs.levelTip = new LoLLevelTip().genLevelTip(obj.getJSONObject("leveltip"));
-        cs.maxrank = obj.getInt("maxrank");
-        cs.name = obj.getString("name");
-        cs.range = JSONUtils.safeUnpack(obj, "range", Functions.toInt);
-        cs.rangeBurn = obj.getString("rangeburn");
-        cs.resource = obj.getString("resources");
-        cs.sanitizedDescription = obj.getString("sanatizeddescription");
-        cs.sanitizedTooltip = obj.getString("sanatizedtooltip");
-        cs.tooltip = obj.getString("tooltip");
-        cs.vars = JSONUtils.mappedList(obj.getJSONArray("vars"), LoLUtils.toSpellVar);
-        return cs;
+    public static Box<LoLChampSpell> genChampSpell(JSONObject obj) {
+      try {
+            LoLChampSpell cs = new LoLChampSpell();
+            cs.altImages = JSONUtils.mappedList(obj.getJSONArray("altimages"), LoLUtils.toImage);
+            cs.cooldown = JSONUtils.mappedList(obj.getJSONArray("cooldown"), Functions.toDouble);
+            cs.coolDownBurn = obj.getString("cooldownburn");
+            cs.costBurn = obj.getString("costburn");
+            cs.description = obj.getString("description");
+            cs.effect = JSONUtils.mappedList(obj.getJSONArray("effect"), ListUtils.toIntList);
+            cs.effectBurn = JSONUtils.mappedList(obj.getJSONArray("effectburn"), Functions.toString);
+            cs.image = LoLImage.genImage(obj.getJSONObject("image"));
+            cs.key = obj.getString("key");
+            cs.levelTip = new LoLLevelTip().genLevelTip(obj.getJSONObject("leveltip"));
+            cs.maxrank = obj.getInt("maxrank");
+            cs.name = obj.getString("name");
+            cs.range = JSONUtils.safeUnpack(obj, "range", Functions.toInt);
+            cs.rangeBurn = obj.getString("rangeburn");
+            cs.resource = obj.getString("resources");
+            cs.sanitizedDescription = obj.getString("sanatizeddescription");
+            cs.sanitizedTooltip = obj.getString("sanatizedtooltip");
+            cs.tooltip = obj.getString("tooltip");
+            cs.vars = JSONUtils.mappedList(obj.getJSONArray("vars"), LoLUtils.toSpellVar);
+            return Box.fill(cs);
+      } catch(JSONException e) {
+          return Box.EMPTY;
+      }
         
     }
     

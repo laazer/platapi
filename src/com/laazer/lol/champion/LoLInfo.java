@@ -11,8 +11,8 @@ public class LoLInfo extends LoLObject{
     int difficulty;
     int magic;
     
-    public LoLInfo genLoLSkin(JSONObject jobj) {
+    public static LoLInfo genLoLSkin(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLInfo().getClass());
     }
 }

@@ -15,8 +15,8 @@ public class LoLImage extends LoLObject {
     int x;
     int y;
     
-    public LoLImage genImage(JSONObject jobj) {
+    public static LoLImage genImage(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLImage().getClass());
     }
 }

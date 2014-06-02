@@ -11,8 +11,8 @@ public class LoLSkin extends LoLObject{
     int num;
     public LoLSkin() {}
     
-    public LoLSkin genLoLSkin(JSONObject jobj) {
+    public static LoLSkin genLoLSkin(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLSkin().getClass());
     }
 }
