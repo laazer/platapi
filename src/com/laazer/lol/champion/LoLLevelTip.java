@@ -11,8 +11,8 @@ public class LoLLevelTip extends LoLObject{
     List<String> effect;
     List<String> lable;
     
-    public LoLLevelTip genLevelTip(JSONObject jobj) {
+    public static LoLLevelTip genLevelTip(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLLevelTip().getClass());
     }
 }

@@ -1,8 +1,10 @@
 package com.laazer.lol.champion;
 
+import org.json.JSONException;
 import org.json.JSONObject;
 
 import com.google.gson.Gson;
+import com.laazer.common.Box;
 import com.laazer.lol.LoLObject;
 
 public class LoLPassive extends LoLObject{
@@ -10,12 +12,18 @@ public class LoLPassive extends LoLObject{
     LoLImage image;
     String name;
     String sanitizedDescription;
-    public LoLPassive(JSONObject jsonObject) {
-        // TODO Auto-generated constructor stub
-    }
+    public LoLPassive() {}
     
-    public LoLPassive genPassive(JSONObject jobj) {
-        Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+    public static Box<LoLPassive> genPassive(JSONObject jobj) {
+        try {
+            LoLPassive pas = new LoLPassive();
+            pas.description = jobj.getString("description");
+            pas.image = LoLImage.genImage(jobj.getJSONObject("image"));
+            pas.name = jobj.getString("name");
+            pas.sanitizedDescription = jobj.getString("sanitizedDescription");
+            return Box.fill(pas);
+        }catch(JSONException e) {
+            return Box.EMPTY;
+        }
     }
 }

@@ -16,8 +16,8 @@ public class LoLStats extends LoLObject{
     Double spellBlock, spellBlockPerLevel;
     public LoLStats() {}
     
-    public LoLStats genLoLStats(JSONObject jobj) {
+    public static LoLStats genLoLStats(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), this.getClass());
+        return gson.fromJson(jobj.toString(), new LoLStats().getClass());
     }
 }

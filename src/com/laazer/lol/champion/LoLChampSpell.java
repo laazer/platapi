@@ -47,7 +47,7 @@ public class LoLChampSpell extends LoLObject{
             cs.effectBurn = JSONUtils.mappedList(obj.getJSONArray("effectburn"), Functions.toString);
             cs.image = LoLImage.genImage(obj.getJSONObject("image"));
             cs.key = obj.getString("key");
-            cs.levelTip = new LoLLevelTip().genLevelTip(obj.getJSONObject("leveltip"));
+            cs.levelTip = LoLLevelTip.genLevelTip(obj.getJSONObject("leveltip"));
             cs.maxrank = obj.getInt("maxrank");
             cs.name = obj.getString("name");
             cs.range = JSONUtils.safeUnpack(obj, "range", Functions.toInt);
