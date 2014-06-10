@@ -34,6 +34,14 @@ public class Functions {
         }
     }
     
+    public static UniFunction<Object, Boolean> toBoolean = new ToBoolean();
+    private static class ToBoolean implements UniFunction<Object, Boolean> {
+        @Override
+        public Boolean apply(Object value) {
+            return (Boolean) value;
+        }
+    }
+    
     public static BinFunction<List, List, List> append = new Append();
     private static class Append<T> implements BinFunction<List<T>, List<T>, List<T>> {
         public List<T> apply(List<T> value1, List<T> value2) {
