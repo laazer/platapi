@@ -17,7 +17,11 @@ public class LoLStats extends LoLObject{
     public LoLStats() {}
     
     public static LoLStats genLoLStats(JSONObject jobj) {
+        return genLoLStats(jobj.toString());
+    }
+    
+    public static LoLStats genLoLStats(String jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), new LoLStats().getClass());
+        return gson.fromJson(jobj, new LoLStats().getClass());
     }
 }

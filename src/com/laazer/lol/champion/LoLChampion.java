@@ -88,33 +88,6 @@ public class LoLChampion extends LoLObject{
         
     }
     
-//    public static Box<LoLChampion> genChampion(int id) {
-//        try {
-//            LoLChampion champ = new LoLChampion();
-//            JSONObject sobj = generateJson(id, Box.fill(simpleTypes));
-//            JSONObject lobj = generateJson(id, Box.fill(simpleLists));
-//            champ.id = id;
-//            champ.freeToPlay = sobj.getBoolean("freetoplay");
-//            champ.key = sobj.getString("key"); champ.name = sobj.getString("name");
-//            champ.title = sobj.getString("title"); champ.blurb = sobj.getString("blurb"); 
-//            champ.allyTips = JSONUtils.mappedList(lobj.getJSONArray("allytips"), Functions.toString);
-//            champ.enemyTips = JSONUtils.mappedList(lobj.getJSONArray("enemytips"), Functions.toString);
-//            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).getJSONObject("image")); 
-//            champ.lore = sobj.getString("lore");
-//            champ.recommended = JSONUtils.mappedList(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
-//            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
-//            champ.partype = sobj.getString("partype");
-//            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
-//            champ.spells = JSONUtils.mappedList(generateJson(id, Box.fill(SPELLS)).getJSONArray("spells"), LoLUtils.toChampSpell);
-//            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).getJSONObject("stats"));
-//            champ.tags = JSONUtils.mappedList(lobj.getJSONArray("tags"), Functions.toString);
-//            return Box.fill(champ);
-//        } catch(JSONException e) {
-//            e.printStackTrace();
-//            return Box.EMPTY;
-//        }
-//    }
-//    
     public static Box<LoLChampion> genChampion(int id) {
         try {
             LoLChampion champ = new LoLChampion();
@@ -125,17 +98,17 @@ public class LoLChampion extends LoLObject{
             champ.freeToPlay = false;//Functions.toBoolean.apply((Object) sobj.get("freetoplay"));
             champ.key = sobj.get("key"); champ.name = sobj.get("name");
             champ.title = sobj.get("title"); champ.blurb = sobj.get("blurb"); 
-            champ.allyTips = JSONUtils.mappedList(lobj.get("allytips"), Functions.toString);
-//            champ.enemyTips = JSONUtils.mappedList(lobj.getJSONArray("enemytips"), Functions.toString);
-//            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).getJSONObject("image")); 
-//            champ.lore = sobj.getString("lore");
+            champ.allyTips = JSONUtils.safeJArrayToList(lobj.get("allytips")).get();
+            champ.enemyTips = JSONUtils.safeJArrayToList(lobj.get("enemytips")).get();
+            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).get("image")); 
+            champ.lore = sobj.get("lore");
 //            champ.recommended = JSONUtils.mappedList(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
-//            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
-//            champ.partype = sobj.getString("partype");
+//           champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
+            champ.partype = sobj.get("partype");
 //            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
 //            champ.spells = JSONUtils.mappedList(generateJson(id, Box.fill(SPELLS)).getJSONArray("spells"), LoLUtils.toChampSpell);
-//            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).getJSONObject("stats"));
-//            champ.tags = JSONUtils.mappedList(lobj.getJSONArray("tags"), Functions.toString);
+            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).get("stats"));
+            champ.tags = JSONUtils.safeJArrayToList(lobj.get("tags")).get();
             return Box.fill(champ);
         } catch(Exception e) {
             e.printStackTrace();
