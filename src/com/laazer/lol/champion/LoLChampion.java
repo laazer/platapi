@@ -123,9 +123,9 @@ public class LoLChampion extends LoLObject{
             champ.id = id;
             //TODO freeToPlay isnt static data get later
             champ.freeToPlay = false;//Functions.toBoolean.apply((Object) sobj.get("freetoplay"));
-            champ.key = Functions.toString.apply(sobj.get("key")); champ.name = Functions.toString.apply(sobj.get("name"));
-            champ.title = Functions.toString.apply(sobj.get("title")); champ.blurb = sobj.getString("blurb"); 
-//            champ.allyTips = JSONUtils.mappedList(lobj.getJSONArray("allytips"), Functions.toString);
+            champ.key = sobj.get("key"); champ.name = sobj.get("name");
+            champ.title = sobj.get("title"); champ.blurb = sobj.get("blurb"); 
+            champ.allyTips = JSONUtils.mappedList(lobj.get("allytips"), Functions.toString);
 //            champ.enemyTips = JSONUtils.mappedList(lobj.getJSONArray("enemytips"), Functions.toString);
 //            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).getJSONObject("image")); 
 //            champ.lore = sobj.getString("lore");
