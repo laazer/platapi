@@ -51,4 +51,18 @@ public class Functions {
         }
     }
     
+    public static BinFunction<Integer, Integer, Integer> add = new Add();
+    private static class Add implements BinFunction<Integer, Integer, Integer> {
+        public Integer apply(Integer value1, Integer value2) {
+            return value1 + value2;
+        }
+        
+    }
+    
+    private static BinFunction<Object, Object, Boolean> equals = new Equals();
+    private static class Equals implements BinFunction<Object, Object, Boolean> {
+        public Boolean apply(Object value1, Object value2) {
+            return value1.equals(value2);
+        }
+    }
 }
