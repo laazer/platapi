@@ -8,11 +8,11 @@ import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 
 public class LoLLevelTip extends LoLObject{
-    List<String> effect;
-    List<String> lable;
+    public List<String> effect;
+    public List<String> lable;
     
-    public static LoLLevelTip genLevelTip(JSONObject jobj) {
+    public static LoLLevelTip genLevelTip(String jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), new LoLLevelTip().getClass());
+        return gson.fromJson(jobj, new LoLLevelTip().getClass());
     }
 }
