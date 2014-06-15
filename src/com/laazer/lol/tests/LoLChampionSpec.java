@@ -27,16 +27,17 @@ public class LoLChampionSpec {
     }
     
     @Test
-    public void testGaren() {
+    public void testExistence() {
         initGaren();
-        assertTrue(garen.isFull());
+//        assertEquals(garen.isFull(), true);
+//        assertTrue(soraka.isFull());
+//        assertTrue(nidalee.isFull());
     }
+    
     
     @Test
-    public void testSoraka() {
-        initSoraka();
-        assertTrue(soraka.isFull());
+    public void test() {
+        fail("Not yet implemented");
     }
-    
-    
+
 }

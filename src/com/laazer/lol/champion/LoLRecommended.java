@@ -7,16 +7,19 @@ import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 
 public class LoLRecommended extends LoLObject{
-    public List<LoLBlock> blocks;
-    public String champion, map, mode;
-    public boolean priority;
-    public String tutke, type;
+    List<LoLBlock> blocks;
+    String champion;
+    String map;
+    String mode;
+    boolean priority;
+    String tutke;
+    String type;
     public LoLRecommended() {
         // TODO Auto-generated constructor stub
     }
     
-    public static LoLRecommended genLoLRecommened(String jobj) {
+    public static LoLRecommended genLoLRecommened(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj, new LoLRecommended().getClass());
+        return gson.fromJson(jobj.toString(), new LoLRecommended().getClass());
     }
 }

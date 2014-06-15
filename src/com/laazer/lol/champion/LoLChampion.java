@@ -19,16 +19,16 @@ import java.lang.Class;
 
 public class LoLChampion extends LoLObject{
     final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
-    public int id;
-    public String key, name, title, blurb, lore, partype;;
-    public List<String> allyTips, enemyTips, tags;
-    public LoLImage image;
-    public LoLInfo info;
-    public Box<LoLPassive> passive;
-    public List<LoLRecommended> recommended;
-    public List<LoLSkin> skins;
-    public List<Box<LoLChampSpell>> spells;
-    public LoLStats stats;
+    int id;
+    String key, name, title, blurb, lore, partype;;
+    List<String> allyTips, enemyTips, tags;
+    LoLImage image;
+    LoLInfo info;
+    Box<LoLPassive> passive;
+    List<LoLRecommended> recommended;
+    List<LoLSkin> skins;
+    List<Box<LoLChampSpell>> spells;
+    LoLStats stats;
     
     LoLChampion() {}
     
@@ -42,40 +42,69 @@ public class LoLChampion extends LoLObject{
     private static String SPELLS = "spells";
     private static String STATS = "stats";
     
-    private static Map<String, Object> generateJson(int id, Box<String> args) {
+    private static Map<String, String> generateJson(int id, Box<String> args) {
         //TODO remove print lines
         JSONParser parser = new JSONParser();
         String myArgs = "";
         if (args.isFull()) myArgs = args.get();
         String url = LocURL + id + "?champData="+ myArgs + "&" + LoLObject.KEY;
-        Map<String, Object> map = (Map<String,Object>) parser.parseJson(UrlManager.executeGet(url).get());
+        System.out.println(url);
+        Map<String, String> map = (Map<String,String>) parser.parseJson(UrlManager.executeGet(url).get());
+        System.out.println(map);
         return map;
     }
     
     private static String generateJsonAsString(int id) {
         String url = LocURL + id + "?champData=all&" + LoLObject.KEY;
-        return UrlManager.executeGet(url).get();
+        System.out.println(url);
+        String jobj = UrlManager.executeGet(url).get();
+        return jobj;
+    }
+    
+    public static Box<LoLChampion> genChampion(JSONObject obj) {
+        try {
+            LoLChampion champ = new LoLChampion();
+            champ.id = obj.getInt("id");
+            champ.key = obj.getString("key"); champ.name = obj.getString("name");
+            champ.title = obj.getString("title"); champ.blurb = obj.getString("blurb"); 
+            champ.allyTips = JSONUtils.mappedList(obj.getJSONArray("allytips"), Functions.toString);
+            champ.enemyTips = JSONUtils.mappedList(obj.getJSONArray("enemytips"), Functions.toString);
+            champ.image = LoLImage.genImage(obj.getJSONObject("image")); 
+            champ.lore = obj.getString("lore");
+            champ.recommended = JSONUtils.mappedList(obj.getJSONArray("recommended"), LoLUtils.toRecommended);
+            champ.passive = LoLPassive.genPassive(obj.getJSONObject("passive"));
+            champ.partype = obj.getString("partype");
+            champ.skins = JSONUtils.mappedList(obj.getJSONArray("skins"), LoLUtils.toSkin);
+            champ.spells = JSONUtils.mappedList(obj.getJSONArray("spells"), LoLUtils.toChampSpell);
+            champ.stats = LoLStats.genLoLStats(obj.getJSONObject("stats"));
+            champ.tags = JSONUtils.mappedList(obj.getJSONArray("tags"), Functions.toString);
+            return Box.fill(champ);
+        } catch(JSONException e) {
+            e.printStackTrace();
+            return Box.EMPTY;
+        }
+        
     }
         
     public static Box<LoLChampion> genChampion(int id) {
         try {
             LoLChampion champ = new LoLChampion();
-            Map<String, Object> sobj = generateJson(id, Box.fill(simpleTypes));
-            Map<String, Object> lobj = generateJson(id, Box.fill(simpleLists));
+            Map<String, String> sobj = generateJson(id, Box.fill(simpleTypes));
+            Map<String, String> lobj = generateJson(id, Box.fill(simpleLists));
             champ.id = id;
-            champ.key = sobj.get("key").toString(); champ.name = sobj.get("name").toString();
-            champ.title = sobj.get("title").toString(); champ.blurb = sobj.get("blurb").toString(); 
-            champ.allyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("allytips")), Functions.toString);
-            champ.enemyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("enemytips")), Functions.toString);
-            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).get("image").toString()); 
-            champ.lore = sobj.get("lore").toString();
+            champ.key = sobj.get("key"); champ.name = sobj.get("name");
+            champ.title = sobj.get("title"); champ.blurb = sobj.get("blurb"); 
+            champ.allyTips = JSONUtils.safeJArrayToList(lobj.get("allytips")).get();
+            champ.enemyTips = JSONUtils.safeJArrayToList(lobj.get("enemytips")).get();
+//            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).getJSONObject("image")); 
+//            champ.lore = sobj.getString("lore");
 //            champ.recommended = JSONUtils.mappedList(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
 //            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
-            champ.partype = sobj.get("partype").toString();
+            champ.partype = sobj.get("partype");
 //            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
 //            champ.spells = JSONUtils.mappedList(generateJson(id, Box.fill(SPELLS)).getJSONArray("spells"), LoLUtils.toChampSpell);
-            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).get("stats").toString());
-            champ.tags = ListUtils.map(ListUtils.toList.apply(lobj.get("tags")), Functions.toString);
+//            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).getJSONObject("stats"));
+            champ.tags = JSONUtils.safeJArrayToList(lobj.get("tags")).get();
             return Box.fill(champ);
         } catch(Exception e) {
             e.printStackTrace();

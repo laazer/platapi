@@ -6,10 +6,13 @@ import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 
 public class LoLInfo extends LoLObject{
-    public int attack, defense, difficulty, magic;
+    int attack;
+    int defense;
+    int difficulty;
+    int magic;
     
-    public static LoLInfo genLoLSkin(String jobj) {
+    public static LoLInfo genLoLSkin(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj, new LoLInfo().getClass());
+        return gson.fromJson(jobj.toString(), new LoLInfo().getClass());
     }
 }

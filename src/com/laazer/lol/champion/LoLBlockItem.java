@@ -1,12 +1,14 @@
 package com.laazer.lol.champion;
 
+import org.json.JSONObject;
+
 import com.google.gson.Gson;
 
 public class LoLBlockItem {
-    public int count, id;
+    int count, id;
     
-    public static LoLBlockItem genBlockItem(String jobj) {
+    public static LoLBlockItem genBlockItem(JSONObject jobj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj, new LoLBlockItem().getClass());
+        return gson.fromJson(jobj.toString(), new LoLBlockItem().getClass());
     }
 }

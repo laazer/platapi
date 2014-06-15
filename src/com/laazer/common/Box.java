@@ -1,7 +1,4 @@
 package com.laazer.common;
-
-import java.util.Collection;
-
 /**
  * 
  * @author laazer
@@ -10,7 +7,7 @@ import java.util.Collection;
  * a single element. Boxes are either full or empty
  * @param <T> type
  */
-public abstract class Box <T> {
+public abstract class Box <T>{
     public boolean isFull(){ return false;}
     public boolean isEmpty(){ return true;}
     public static Box EMPTY = Box.empty();

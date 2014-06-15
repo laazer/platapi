@@ -1,27 +1,28 @@
 package com.laazer.lol.champion;
 
 import java.util.List;
-import java.util.Map;
 
-import com.json.parsers.JSONParser;
-import com.laazer.common.*;
+import org.json.JSONException;
+import org.json.JSONObject;
+
+import com.laazer.common.Box;
+import com.laazer.common.JSONUtils;
 import com.laazer.lol.LoLObject;
 import com.laazer.lol.LoLUtils;
 
 public class LoLBlock extends LoLObject{
-    public List<LoLBlockItem> items;
-    public boolean recMath;
-    public String type;
+    List<LoLBlockItem> items;
+    boolean recMath;
+    String type;
     
-    public static Box<LoLBlock> genBlock(String obj) {
+    public static Box<LoLBlock> genBlock(JSONObject obj) {
        try { 
-            Map<String, Object> lobj = new JSONParser().parseJson(obj);
             LoLBlock lb = new LoLBlock();
-            lb.items = ListUtils.map(ListUtils.toList.apply(lobj.get("items")), LoLUtils.toBlockItem);
-            lb.recMath = Functions.toBoolean.apply(lobj.get("recmath"));
-            lb.type = lobj.get("type").toString();
+            lb.items = JSONUtils.mappedList(obj.getJSONArray("items"), LoLUtils.toBlockItem);
+            lb.recMath = obj.getBoolean("recmath");
+            lb.type = obj.getString("type");
             return Box.fill(lb);
-       }catch (IllegalArgumentException e) {
+       }catch (JSONException e) {
            e.printStackTrace();
            return Box.EMPTY;
        }
