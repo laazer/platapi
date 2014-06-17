@@ -1,7 +1,5 @@
 package com.laazer.lol.champion;
 
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 
@@ -11,8 +9,8 @@ public class LoLSkin extends LoLObject{
     int num;
     public LoLSkin() {}
     
-    public static LoLSkin genLoLSkin(JSONObject jobj) {
+    public static LoLSkin genLoLSkin(String obj) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj.toString(), new LoLSkin().getClass());
+        return gson.fromJson(obj, new LoLSkin().getClass());
     }
 }

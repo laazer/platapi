@@ -33,4 +33,10 @@ public class LoLPassive extends LoLObject{
             return Box.EMPTY;
         }
     }
+
+    public String getDescription() { return description;}
+    public LoLImage getImage() {return image;}
+    public String getName() {return name;}
+    public String getSanitizedDescription() {return sanitizedDescription;}
+    
 }

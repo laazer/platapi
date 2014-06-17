@@ -38,5 +38,11 @@ public class LoLChampionSpec {
         assertTrue(soraka.isFull());
     }
     
+    @Test
+    public void testNid() {
+        initNid();
+        assertTrue(nidalee.isFull());
+    }
+    
     
 }

@@ -9,9 +9,9 @@ import com.laazer.lol.LoLObject;
 import com.laazer.lol.LoLUtils;
 
 public class LoLBlock extends LoLObject{
-    public List<LoLBlockItem> items;
-    public boolean recMath;
-    public String type;
+    private List<LoLBlockItem> items;
+    private boolean recMath;
+    private String type;
     
     public static Box<LoLBlock> genBlock(String obj) {
        try { 
@@ -26,4 +26,9 @@ public class LoLBlock extends LoLObject{
            return Box.EMPTY;
        }
     }
+
+    public List<LoLBlockItem> getItems() {return items;}
+    public boolean isRecMath() {return recMath;}
+    public String getType() {return type;}
+    
 }

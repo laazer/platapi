@@ -19,17 +19,17 @@ import java.lang.Class;
 
 public class LoLChampion extends LoLObject{
     final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
-    public int id;
-    public String key, name, title, blurb, lore, partype;;
-    public List<String> allyTips, enemyTips, tags;
-    public LoLImage image;
-    public LoLInfo info;
-    public Box<LoLPassive> passive;
-    public List<LoLRecommended> recommended;
-    public List<LoLSkin> skins;
-    public List<Box<LoLChampSpell>> spells;
-    public LoLStats stats;
-    
+    private int id;
+    private String key, name, title, blurb, lore, partype;;
+    private List<String> allyTips, enemyTips, tags;
+    private LoLImage image;
+    private LoLInfo info;
+    private Box<LoLPassive> passive;
+    private List<LoLRecommended> recommended;
+    private List<LoLSkin> skins;
+    private List<Box<LoLChampSpell>> spells;
+    private LoLStats stats;
+
     LoLChampion() {}
     
     private static String simpleTypes = "blurb,lore,partype";
@@ -82,6 +82,25 @@ public class LoLChampion extends LoLObject{
             return Box.EMPTY;
         }
     }
+    
+    //all of the getters for this class
+    public int getId() {return id;}
+    public String getKey() {return key;}
+    public String getName() {return name;}
+    public String getTitle() {return title;}
+    public String getBlurb() {return blurb;}
+    public String getLore() {return lore;}
+    public String getPartype() {return partype;}
+    public List<String> getAllyTips() {return allyTips;}
+    public List<String> getEnemyTips() {return enemyTips;}
+    public List<String> getTags() {return tags;}
+    public LoLImage getImage() {return image;}
+    public LoLInfo getInfo() {return info;}
+    public Box<LoLPassive> getPassive() {return passive;}
+    public List<LoLRecommended> getRecommended() {return recommended;}
+    public List<LoLSkin> getSkins() {return skins;}
+    public List<Box<LoLChampSpell>> getSpells() {return spells;}
+    public LoLStats getStats() {return stats;}
     
     //TODO make a quick and dirty method for freeToPlay (joking about the dirty part)
     public Boolean freeToPlay() {return false;}

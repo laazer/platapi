@@ -15,19 +15,19 @@ import com.laazer.common.UniFunction;
 import com.laazer.lol.LoLUtils;
 
 public class LoLChampSpell extends LoLObject{
-    public List<LoLImage> altImages;
-    public List<Double> cooldown;
-    public String coolDownBurn, costBurn, costType, description;
-    public List<List<Integer>> effect;
-    public List<String> effectBurn;
-    public LoLImage image;
-    public String key;
-    public LoLLevelTip levelTip;
-    public int maxrank;
-    public String name;
-    public Box<Integer> range;
-    public String rangeBurn, resource, sanitizedDescription, sanitizedTooltip, tooltip;
-    public List<LoLSpellVars> vars;
+    private List<LoLImage> altImages;
+    private List<Double> cooldown;
+    private String coolDownBurn, costBurn, costType, description;
+    private List<List<Integer>> effect;
+    private List<String> effectBurn;
+    private LoLImage image;
+    private String key;
+    private LoLLevelTip levelTip;
+    private int maxrank;
+    private String name;
+    private Box<Integer> range;
+    private String rangeBurn, resource, sanitizedDescription, sanitizedTooltip, tooltip;
+    private List<LoLSpellVars> vars;
     
     public LoLChampSpell() {}
     
@@ -60,7 +60,27 @@ public class LoLChampSpell extends LoLObject{
         }
           
       }
-    
+
+    public List<LoLImage> getAltImages() {return altImages;}
+    public List<Double> getCooldown() { return cooldown;}
+    public String getCoolDownBurn() {return coolDownBurn;}
+    public String getCostBurn() {return costBurn;}
+    public String getCostType() {return costType;}
+    public String getDescription() {return description;}
+    public List<List<Integer>> getEffect() {return effect;}
+    public List<String> getEffectBurn() {return effectBurn;}
+    public LoLImage getImage() {return image;}
+    public String getKey() {return key;}
+    public LoLLevelTip getLevelTip() {return levelTip;}
+    public int getMaxrank() {return maxrank;}
+    public String getName() { return name;}
+    public Box<Integer> getRange() {return range;}
+    public String getRangeBurn() {return rangeBurn;}
+    public String getResource() {return resource;}
+    public String getSanitizedDescription() {return sanitizedDescription;}
+    public String getSanitizedTooltip() {return sanitizedTooltip;}
+    public String getTooltip() {return tooltip;}
+    public List<LoLSpellVars> getVars() {return vars;}
     
 }
 

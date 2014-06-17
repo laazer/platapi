@@ -16,37 +16,37 @@ public class LoLUtils extends LoLObject{
     
     private static class ToRecommended implements UniFunction<Object, LoLRecommended> {
         public LoLRecommended apply(Object value) {
-            return LoLRecommended.genLoLRecommened(JSONUtils.toJSONObject.apply(value));
+            return LoLRecommended.genLoLRecommened(value.toString());
         }
     }
     
     private static class ToSkin implements UniFunction<Object, LoLSkin> {
         public LoLSkin apply(Object value) {
-            return LoLSkin.genLoLSkin(JSONUtils.toJSONObject.apply(value));
+            return LoLSkin.genLoLSkin(value.toString());
         }
     }
     
     private static class ToSpellVars implements UniFunction<Object, LoLSpellVars> {
         public LoLSpellVars apply(Object value) {
-            return LoLSpellVars.genSpellVars(JSONUtils.toJSONObject.apply(value));
+            return LoLSpellVars.genSpellVars(value.toString());
         }
     }
     
     private static class ToChampSpell implements UniFunction<Object, Box<LoLChampSpell>> {
         public Box<LoLChampSpell> apply(Object value) {
-            return LoLChampSpell.genChampSpell(JSONUtils.toJSONObject.apply(value));
+            return LoLChampSpell.genChampSpell(value.toString());
         }
     }
     
     private static class ToImage implements UniFunction<Object, LoLImage> {
         public LoLImage apply(Object value) {
-            return LoLImage.genImage(JSONUtils.toJSONObject.apply(value));
+            return LoLImage.genImage(value.toString());
         }
     }
     
     private static class ToBlockItem implements UniFunction<Object, LoLBlockItem> {
         public LoLBlockItem apply(Object value) {
-            return LoLBlockItem.genBlockItem(JSONUtils.toJSONObject.apply(value));
+            return LoLBlockItem.genBlockItem(value.toString());
         }
         
     }
