@@ -11,9 +11,7 @@ public class LoLRecommended extends LoLObject{
     private String champion, map, mode;
     private boolean priority;
     private String tutke, type;
-    private LoLRecommended() {
-        // TODO Auto-generated constructor stub
-    }
+    private LoLRecommended() {}
     
     public static LoLRecommended genLoLRecommened(String jobj) {
         Gson gson = new Gson();

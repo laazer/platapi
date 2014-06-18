@@ -1,7 +1,7 @@
 TODO List
 ==============
 -Create class that acts as overall generator for LoLObjects that takes 
-in a apikey in order to generate
+in a apikey in order to generate (name: riotForge)
 
 -Create enermations to so that it is possible to get a partial champion
 

@@ -18,17 +18,18 @@ import com.laazer.lol.Region;
 import java.lang.Class;
 
 public class LoLChampion extends LoLObject{
-    final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
+    private final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
     private int id;
-    private String key, name, title, blurb, lore, partype;;
-    private List<String> allyTips, enemyTips, tags;
-    private LoLImage image;
-    private LoLInfo info;
+    private String key, name;
+    private Box<String> title, blurb, lore, partype;;
+    private Box<List<String>> allyTips, enemyTips, tags;
+    private Box<LoLImage> image;
+    private Box<LoLInfo> info;
     private Box<LoLPassive> passive;
-    private List<LoLRecommended> recommended;
-    private List<LoLSkin> skins;
-    private List<Box<LoLChampSpell>> spells;
-    private LoLStats stats;
+    private Box<List<LoLRecommended>> recommended;
+    private Box<List<LoLSkin>> skins;
+    private Box<List<Box<LoLChampSpell>>> spells;
+    private Box<LoLStats> stats;
 
     LoLChampion() {}
     
@@ -41,6 +42,20 @@ public class LoLChampion extends LoLObject{
     private static String SKINS = "skins";
     private static String SPELLS = "spells";
     private static String STATS = "stats";
+    
+    public static Box<LoLChampion> genComplexChamp(int id, LoLChampVal[]... args) {
+        String params = getParams(args);
+        
+    }
+    
+    private static String getParams(LoLChampVal[]... args) {
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < args.length; i++) {
+            sb = sb.append(args[i].toString()).append('&');
+        }
+        return sb.toString();
+    }
+    
     
     private static Map<String, Object> generateJson(int id, Box<String> args) {
         //TODO remove print lines
@@ -57,19 +72,19 @@ public class LoLChampion extends LoLObject{
         return UrlManager.executeGet(url).get();
     }
         
-    public static Box<LoLChampion> genChampion(int id) {
+    public static Box<LoLChampion> genChampion(Map<String, Object> cobj) {
         try {
             LoLChampion champ = new LoLChampion();
-            Map<String, Object> sobj = generateJson(id, Box.fill(simpleTypes));
-            Map<String, Object> lobj = generateJson(id, Box.fill(simpleLists));
-            champ.id = id;
-            champ.key = sobj.get("key").toString(); champ.name = sobj.get("name").toString();
-            champ.title = sobj.get("title").toString(); champ.blurb = sobj.get("blurb").toString(); 
+            champ.id = Integer.parseInt(cobj.get("id").toString());
+            champ.key = cobj.get("key").toString(); 
+            champ.name = cobj.get("name").toString();
+            champ.title = Box.fill(cobj.get("title")).map(Functions.toString);
+            champ.blurb = Box.fill(cobj.get("blurb")).map(Functions.toString);
+            champ.lore = Box.fill(cobj.get("lore")).map(Functions.toString);
             champ.allyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("allytips")), Functions.toString);
             champ.enemyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("enemytips")), Functions.toString);
             champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).get("image").toString()); 
-            champ.lore = sobj.get("lore").toString();
-//            champ.recommended = JSONUtils.mappedList(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
+//            champ.recommended = ListUtils.map(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
 //            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
             champ.partype = sobj.get("partype").toString();
 //            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
@@ -87,22 +102,23 @@ public class LoLChampion extends LoLObject{
     public int getId() {return id;}
     public String getKey() {return key;}
     public String getName() {return name;}
-    public String getTitle() {return title;}
-    public String getBlurb() {return blurb;}
-    public String getLore() {return lore;}
-    public String getPartype() {return partype;}
-    public List<String> getAllyTips() {return allyTips;}
-    public List<String> getEnemyTips() {return enemyTips;}
-    public List<String> getTags() {return tags;}
-    public LoLImage getImage() {return image;}
-    public LoLInfo getInfo() {return info;}
+    public Box<String> getTitle() {return title;}
+    public Box<String> getBlurb() {return blurb;}
+    public Box<String> getLore() {return lore;}
+    public Box<String> getPartype() {return partype;}
+    public Box<List<String>> getAllyTips() {return allyTips;}
+    public Box<List<String>> getEnemyTips() {return enemyTips;}
+    public Box<List<String>> getTags() {return tags;}
+    public Box<LoLImage> getImage() {return image;}
+    public Box<LoLInfo> getInfo() {return info;}
     public Box<LoLPassive> getPassive() {return passive;}
-    public List<LoLRecommended> getRecommended() {return recommended;}
-    public List<LoLSkin> getSkins() {return skins;}
-    public List<Box<LoLChampSpell>> getSpells() {return spells;}
-    public LoLStats getStats() {return stats;}
+    public Box<List<LoLRecommended>> getRecommended() {return recommended;}
+    public Box<List<LoLSkin>> getSkins() {return skins;}
+    public Box<List<Box<LoLChampSpell>>> getSpells() {return spells;}
+    public Box<LoLStats> getStats() {return stats;}
     
     //TODO make a quick and dirty method for freeToPlay (joking about the dirty part)
     public Boolean freeToPlay() {return false;}
     
 }
+

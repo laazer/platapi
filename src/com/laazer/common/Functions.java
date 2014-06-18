@@ -30,7 +30,7 @@ public class Functions {
     private static class ToInt implements UniFunction<Object, Integer> {
         @Override
         public Integer apply(Object value) {
-            return (Integer) value;
+            return Integer.parseInt(value.toString());
         }
     }
     
@@ -38,7 +38,7 @@ public class Functions {
     private static class ToBoolean implements UniFunction<Object, Boolean> {
         @Override
         public Boolean apply(Object value) {
-            return (Boolean) value;
+            return Boolean.parseBoolean(value.toString());
         }
     }
     
