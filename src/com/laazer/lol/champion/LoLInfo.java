@@ -8,7 +8,7 @@ import com.laazer.lol.LoLObject;
 public class LoLInfo extends LoLObject{
     private int attack, defense, difficulty, magic;
     
-    public static LoLInfo genLoLSkin(String jobj) {
+    public static LoLInfo genLoLInfo(String jobj) {
         Gson gson = new Gson();
         return gson.fromJson(jobj, new LoLInfo().getClass());
     }

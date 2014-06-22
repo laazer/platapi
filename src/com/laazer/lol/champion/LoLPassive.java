@@ -16,10 +16,6 @@ public class LoLPassive extends LoLObject{
     private String name, sanitizedDescription;
     public LoLPassive() {}
     
-    public static Box<LoLPassive> genPassive(JSONObject jobj) {
-        return genPassive(jobj.toString());
-    }
-    
     public static Box<LoLPassive> genPassive(String jobj) {
         try {
             Map<String, Object> lobj = new JSONParser().parseJson(jobj);

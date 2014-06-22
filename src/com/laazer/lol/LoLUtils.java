@@ -48,7 +48,6 @@ public class LoLUtils extends LoLObject{
         public LoLBlockItem apply(Object value) {
             return LoLBlockItem.genBlockItem(value.toString());
         }
-        
     }
     
 }

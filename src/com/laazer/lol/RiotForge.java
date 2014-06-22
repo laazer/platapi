@@ -5,13 +5,17 @@ import com.laazer.lol.champion.LoLChampVal;
 import com.laazer.lol.champion.LoLChampion;
 
 public class RiotForge {
-
-    public static Box<LoLChampion> genSimpleChamp(int id) {
-        return genComplexChamp(id);
+    String key;
+    public RiotForge(String key){
+        this.key = key;
+    }
+    
+    public Box<LoLChampion> genSimpleChamp(int id) {
+        return this.genComplexChamp(id);
     }
     
     //TODO
-    public static Box<LoLChampion> genComplexChamp(int id, LoLChampVal[]... args) {
+    public Box<LoLChampion> genComplexChamp(int id, LoLChampVal[]... args) {
         return Box.EMPTY;
     }
     

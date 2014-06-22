@@ -43,7 +43,7 @@ public class LoLChampion extends LoLObject{
     private static String SPELLS = "spells";
     private static String STATS = "stats";
     
-    public static Box<LoLChampion> genComplexChamp(int id, LoLChampVal[]... args) {
+    public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal[]... args) {
         String params = getParams(args);
         
     }
@@ -67,8 +67,8 @@ public class LoLChampion extends LoLObject{
         return map;
     }
     
-    private static String generateJsonAsString(int id) {
-        String url = LocURL + id + "?champData=all&" + LoLObject.KEY;
+    private static String generateJsonAsString(int id, String key) {
+        String url = LocURL + id + "?champData=all&" + key;
         return UrlManager.executeGet(url).get();
     }
         
@@ -86,7 +86,7 @@ public class LoLChampion extends LoLObject{
             champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).get("image").toString()); 
 //            champ.recommended = ListUtils.map(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
 //            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
-            champ.partype = sobj.get("partype").toString();
+            champ.partype = Box.fill(cobj.get("partype").toString());
 //            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
 //            champ.spells = JSONUtils.mappedList(generateJson(id, Box.fill(SPELLS)).getJSONArray("spells"), LoLUtils.toChampSpell);
             champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).get("stats").toString());
@@ -95,6 +95,55 @@ public class LoLChampion extends LoLObject{
         } catch(Exception e) {
             e.printStackTrace();
             return Box.EMPTY;
+        }
+    }
+    
+    private static void setFeilds(LoLChampion champ, Map<String, Object> obj, LoLChampVal arg) {
+        try {
+            switch(arg) {
+            case BLURB: {
+                champ.blurb = Box.fill(obj.get(arg.toString())).map(Functions.toString);
+            }
+            case LORE:  {
+                champ.lore = Box.fill(obj.get(arg.toString())).map(Functions.toString);
+            }
+            case PARTYPE: {
+                champ.partype = Box.fill(obj.get(arg.toString()).toString());
+            }
+            case ALLY_TIPS: {
+                champ.allyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+            }
+            case ENEMY_TIPS: {
+                champ.enemyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+            }
+            case TAGS: {
+                champ.tags = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+            }
+            case IMAGE: {
+                champ.image = Box.fill(LoLImage.genImage(obj.get(arg.toString()).toString())); 
+            }
+            case INFO: {
+                champ.info = Box.fill(LoLInfo.genLoLInfo(obj.get(arg.toString()).toString()));
+            }
+            case PASSIVE: {
+                champ.passive = LoLPassive.genPassive(obj.get(arg.toString()).toString());
+            }
+            case RECOMMENDED: {
+                champ.recommended = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toRecommended));
+            }
+            case SKINS: {
+                champ.skins = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toSkin));
+            }
+            case SPELLS: {
+                champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toChampSpell));
+            }
+            case STATS: {
+                champ.stats = Box.fill(LoLStats.genLoLStats(obj.get(arg.toString()).toString()));
+            }
+        }
+            
+        } catch(Exception e) {
+            e.printStackTrace();
         }
     }
     
