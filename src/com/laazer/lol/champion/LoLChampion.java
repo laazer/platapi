@@ -30,7 +30,6 @@ public class LoLChampion extends LoLObject{
     private Box<List<LoLSkin>> skins;
     private Box<List<Box<LoLChampSpell>>> spells;
     private Box<LoLStats> stats;
-
     LoLChampion() {}
     
     public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal... args) {
