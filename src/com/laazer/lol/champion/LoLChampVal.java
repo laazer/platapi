@@ -2,7 +2,7 @@ package com.laazer.lol.champion;
 
 public enum LoLChampVal {
     BLURB, LORE, PARTYPE, ALLY_TIPS, ENEMY_TIPS, TAGS, IMAGE, INFO, PASSIVE,
-    RECOMMENDED, SKINS, SPELLS, STATS;
+    RECOMMENDED, SKINS, SPELLS, STATS, ALL;
     
     @Override
     public String toString() {
@@ -19,7 +19,8 @@ public enum LoLChampVal {
             case RECOMMENDED: return "recommended"; 
             case SKINS: return "skins"; 
             case SPELLS: return "spells"; 
-            case STATS: return "stats"; 
+            case STATS: return "stats";
+            case ALL: return "all";
             default: return "";
         }
     }

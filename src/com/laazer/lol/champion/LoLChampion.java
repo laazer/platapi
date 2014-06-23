@@ -20,8 +20,8 @@ import java.lang.Class;
 public class LoLChampion extends LoLObject{
     private final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
     private int id;
-    private String key, name;
-    private Box<String> title, blurb, lore, partype;;
+    private String key, name, title;
+    private Box<String> blurb, lore, partype;;
     private Box<List<String>> allyTips, enemyTips, tags;
     private Box<LoLImage> image;
     private Box<LoLInfo> info;
@@ -33,72 +33,43 @@ public class LoLChampion extends LoLObject{
 
     LoLChampion() {}
     
-    private static String simpleTypes = "blurb,lore,partype";
-    private static String simpleLists = "allytips,enemytips,tags";
-    private static String IMAGE = "image";
-    private static String INFO = "info";
-    private static String PASSIVE = "passive";
-    private static String RECOMMEDED = "recommended";
-    private static String SKINS = "skins";
-    private static String SPELLS = "spells";
-    private static String STATS = "stats";
-    
-    public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal[]... args) {
-        String params = getParams(args);
-        
-    }
-    
-    private static String getParams(LoLChampVal[]... args) {
-        StringBuffer sb = new StringBuffer();
-        for(int i = 0; i < args.length; i++) {
-            sb = sb.append(args[i].toString()).append('&');
-        }
-        return sb.toString();
-    }
-    
-    
-    private static Map<String, Object> generateJson(int id, Box<String> args) {
-        //TODO remove print lines
-        JSONParser parser = new JSONParser();
-        String myArgs = "";
-        if (args.isFull()) myArgs = args.get();
-        String url = LocURL + id + "?champData="+ myArgs + "&" + LoLObject.KEY;
-        Map<String, Object> map = (Map<String,Object>) parser.parseJson(UrlManager.executeGet(url).get());
-        return map;
-    }
-    
-    private static String generateJsonAsString(int id, String key) {
-        String url = LocURL + id + "?champData=all&" + key;
-        return UrlManager.executeGet(url).get();
-    }
-        
-    public static Box<LoLChampion> genChampion(Map<String, Object> cobj) {
+    public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal... args) {
+        LoLChampion champ = genSimpleChamp(genJsonMap(id, key));
+        Map<String, Object> mobj = genJsonMap(id, key, args);
         try {
-            LoLChampion champ = new LoLChampion();
-            champ.id = Integer.parseInt(cobj.get("id").toString());
-            champ.key = cobj.get("key").toString(); 
-            champ.name = cobj.get("name").toString();
-            champ.title = Box.fill(cobj.get("title")).map(Functions.toString);
-            champ.blurb = Box.fill(cobj.get("blurb")).map(Functions.toString);
-            champ.lore = Box.fill(cobj.get("lore")).map(Functions.toString);
-            champ.allyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("allytips")), Functions.toString);
-            champ.enemyTips = ListUtils.map(ListUtils.toList.apply(lobj.get("enemytips")), Functions.toString);
-            champ.image = LoLImage.genImage(generateJson(id, Box.fill(IMAGE)).get("image").toString()); 
-//            champ.recommended = ListUtils.map(generateJson(id, Box.fill(RECOMMEDED)).getJSONArray("recommended"), LoLUtils.toRecommended);
-//            champ.passive = LoLPassive.genPassive(generateJson(id, Box.fill(PASSIVE)).getJSONObject("passive"));
-            champ.partype = Box.fill(cobj.get("partype").toString());
-//            champ.skins = JSONUtils.mappedList(generateJson(id, Box.fill(SKINS)).getJSONArray("skins"), LoLUtils.toSkin);
-//            champ.spells = JSONUtils.mappedList(generateJson(id, Box.fill(SPELLS)).getJSONArray("spells"), LoLUtils.toChampSpell);
-            champ.stats = LoLStats.genLoLStats(generateJson(id, Box.fill(STATS)).get("stats").toString());
-            champ.tags = ListUtils.map(ListUtils.toList.apply(lobj.get("tags")), Functions.toString);
+            for(int i = 0; i < args.length; i++) {
+                setFields(champ, mobj, args[i]);
+            }
             return Box.fill(champ);
-        } catch(Exception e) {
-            e.printStackTrace();
+        } catch (Exception e) {
             return Box.EMPTY;
         }
     }
     
-    private static void setFeilds(LoLChampion champ, Map<String, Object> obj, LoLChampVal arg) {
+    private static String getParams(LoLChampVal... args) {
+        StringBuffer sb = new StringBuffer();
+        for(int i = 0; i < args.length; i++) {
+            sb = sb.append(args[i].toString()).append(',');
+        }
+        return sb.substring(0, sb.length() - 2).concat("&").toString();
+    }
+    
+    private static Map<String, Object> genJsonMap(int id, String key, LoLChampVal... args) {
+        String url = LocURL + id + "?champData=" + getParams(args) + "api_key=" + key;
+        String map = UrlManager.executeGet(url).get();
+        return (Map<String, Object>)new JSONParser().parseJson(map);
+    }
+        
+    private static LoLChampion genSimpleChamp(Map<String, Object> cobj) {
+            LoLChampion champ = new LoLChampion();
+            champ.id = Integer.parseInt(cobj.get("id").toString());
+            champ.key = cobj.get("key").toString(); 
+            champ.name = cobj.get("name").toString();
+            champ.title = cobj.get("title").toString();
+            return champ;
+    }
+    
+    private static void setFields(LoLChampion champ, Map<String, Object> obj, LoLChampVal arg) {
         try {
             switch(arg) {
             case BLURB: {
@@ -151,7 +122,7 @@ public class LoLChampion extends LoLObject{
     public int getId() {return id;}
     public String getKey() {return key;}
     public String getName() {return name;}
-    public Box<String> getTitle() {return title;}
+    public String getTitle() {return title;}
     public Box<String> getBlurb() {return blurb;}
     public Box<String> getLore() {return lore;}
     public Box<String> getPartype() {return partype;}
