@@ -33,8 +33,8 @@ public class LoLChampion extends LoLObject{
     LoLChampion() {}
     
     public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal... args) {
-        LoLChampion champ = genSimpleChamp(genJsonMap(id, key));
         Map<String, Object> mobj = genJsonMap(id, key, args);
+        LoLChampion champ = genSimpleChamp(mobj);
         try {
             for(int i = 0; i < args.length; i++) {
                 setFields(champ, mobj, args[i]);
@@ -50,11 +50,14 @@ public class LoLChampion extends LoLObject{
         for(int i = 0; i < args.length; i++) {
             sb = sb.append(args[i].toString()).append(',');
         }
-        return sb.substring(0, sb.length() - 2).concat("&").toString();
+        if (sb.length() > 0) return sb.substring(0, sb.length() - 1).concat("&").toString();
+        else return "";
     }
     
     private static Map<String, Object> genJsonMap(int id, String key, LoLChampVal... args) {
-        String url = LocURL + id + "?champData=" + getParams(args) + "api_key=" + key;
+        String eq = "";
+        if(args.length > 0) eq = "="; else eq = "";
+        String url = LocURL + id + "?champData" + eq + getParams(args) + "api_key=" + key;
         String map = UrlManager.executeGet(url).get();
         return (Map<String, Object>)new JSONParser().parseJson(map);
     }
