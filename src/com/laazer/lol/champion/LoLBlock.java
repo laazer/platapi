@@ -1,9 +1,10 @@
 package com.laazer.lol.champion;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import com.json.parsers.JSONParser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.laazer.common.*;
 import com.laazer.lol.LoLObject;
 import com.laazer.lol.LoLUtils;
@@ -15,7 +16,8 @@ public class LoLBlock extends LoLObject{
     
     public static Box<LoLBlock> genBlock(String obj) {
        try { 
-            Map<String, Object> lobj = new JSONParser().parseJson(obj);
+            Map<String, Object> lobj = new Gson().fromJson(obj, new TypeToken<HashMap<String, Object>>() {
+            }.getType());
             LoLBlock lb = new LoLBlock();
             lb.items = ListUtils.map(ListUtils.toList.apply(lobj.get("items")), LoLUtils.toBlockItem);
             lb.recMath = Functions.toBoolean.apply(lobj.get("recmath"));

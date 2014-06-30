@@ -1,21 +1,18 @@
 package com.laazer.lol.champion;
 
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-import org.json.JSONException;
-import org.json.JSONObject;
-import com.google.gson.Gson;
-import com.json.parsers.*;
+import com.google.gson.reflect.TypeToken;
 import com.laazer.common.Box;
-import com.laazer.common.UniFunction;
 import com.laazer.common.Functions;
-import com.laazer.common.JSONUtils;
 import com.laazer.common.ListUtils;
 import com.laazer.common.UrlManager;
 import com.laazer.lol.LoLObject;
 import com.laazer.lol.LoLUtils;
 import com.laazer.lol.Region;
-import java.lang.Class;
+import com.google.gson.*;
+
 
 public class LoLChampion extends LoLObject{
     private final static String LocURL = LoLObject.URL + "static-data/"+ Region.NA +"/v1.2/champion/";
@@ -44,7 +41,7 @@ public class LoLChampion extends LoLObject{
             return Box.EMPTY;
         }
     }
-    
+
     private static String getParams(LoLChampVal... args) {
         StringBuffer sb = new StringBuffer();
         for(int i = 0; i < args.length; i++) {
@@ -59,7 +56,7 @@ public class LoLChampion extends LoLObject{
         if(args.length > 0) eq = "="; else eq = "";
         String url = LocURL + id + "?champData" + eq + getParams(args) + "api_key=" + key;
         String map = UrlManager.executeGet(url).get();
-        return (Map<String, Object>)new JSONParser().parseJson(map);
+        return new Gson().fromJson(map, new TypeToken<HashMap<String, Object>>() {}.getType());
     }
         
     private static LoLChampion genSimpleChamp(Map<String, Object> cobj) {

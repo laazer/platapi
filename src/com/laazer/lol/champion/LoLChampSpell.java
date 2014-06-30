@@ -1,17 +1,13 @@
 package com.laazer.lol.champion;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
-import com.json.parsers.JSONParser;
+import com.google.gson.Gson;
+import com.google.gson.reflect.TypeToken;
 import com.laazer.common.Box;
 import com.laazer.common.Functions;
-import com.laazer.common.JSONUtils;
 import com.laazer.common.ListUtils;
 import com.laazer.lol.LoLObject;
-import com.laazer.common.UniFunction;
 import com.laazer.lol.LoLUtils;
 
 public class LoLChampSpell extends LoLObject{
@@ -33,7 +29,7 @@ public class LoLChampSpell extends LoLObject{
     
     public static Box<LoLChampSpell> genChampSpell(String obj) {
         try {
-              Map<String, Object> lobj = new JSONParser().parseJson(obj);
+              Map<String, Object> lobj = new Gson().fromJson(obj, new TypeToken<HashMap<String, Object>>(){}.getType());
               LoLChampSpell cs = new LoLChampSpell();
               cs.altImages = ListUtils.map(ListUtils.toList.apply(lobj.get("altimages")), LoLUtils.toImage);
               cs.cooldown = ListUtils.map(ListUtils.toList.apply(("cooldown")), Functions.toDouble);
