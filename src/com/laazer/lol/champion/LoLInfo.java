@@ -1,7 +1,5 @@
 package com.laazer.lol.champion;
 
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 

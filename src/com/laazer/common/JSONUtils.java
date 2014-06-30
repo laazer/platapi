@@ -2,38 +2,34 @@ package com.laazer.common;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
-import com.google.gson.Gson;
-import com.json.*;
-import com.json.parsers.JSONParser;
+import com.google.gson.JsonArray;
+import com.google.gson.JsonObject;
+import com.oracle.javafx.jmx.json.JSONException;
 
 public class JSONUtils {
     
-    public static UniFunction<Object, JSONObject> toJSONObject = new ToJSONObject();
+    public static UniFunction<Object, JsonObject> toJSONObject = new ToJSONObject();
     
-    public static List<Object> jArrayToList(JSONArray jarray) throws JSONException {
+    public static List<Object> jArrayToList(JsonArray jarray) throws JSONException {
         List<Object> jlist = new ArrayList<Object>();
-        for(int i = 0; i < jarray.length(); i++){
-           jlist.add(jarray.getJSONObject(i));
+        for(int i = 0; i < jarray.size(); i++){
+           jlist.add((Object) jarray.get(i));
         }
         return jlist;        
     }
     
-    public static <R> List<R> mappedList(JSONArray jarray, UniFunction<Object, R> f) throws JSONException {
+    public static <R> List<R> mappedList(JsonArray jarray, UniFunction<Object, R> f) throws JSONException {
         return ListUtils.map(JSONUtils.jArrayToList(jarray), f);
     }
     
-    private static class ToJSONObject implements UniFunction<Object, JSONObject> {
+    private static class ToJSONObject implements UniFunction<Object, JsonObject> {
         @Override
-        public JSONObject apply(Object value) {
-            return (JSONObject) value;
+        public JsonObject apply(Object value) {
+            return (JsonObject) value;
         }
     }
 
-    public static <T> Box<T> safeUnpack(JSONObject jobj, String name, UniFunction<Object, T> f) {
+    public static <T> Box<T> safeUnpack(JsonObject jobj, String name, UniFunction<Object, T> f) {
         try {
             return new Full(f.apply((Object) jobj.get(name)));
         }catch(Exception e) {
@@ -46,7 +42,7 @@ public class JSONUtils {
         List<String> jlist = new ArrayList<String>();
         Boolean dquote = false;
         char fChar = s.charAt(1);
-        if (!(s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']')) throw new JSONException("Poorly formatted array");
+        if (!(s.charAt(0) == '[' && s.charAt(s.length() - 1) == ']')) throw new JSONException("Poorly formatted array", 1, 1);
         for(int i = 1; i < s.length() - 1; i++) {  
             String tmp = "";
             if (s.charAt(i) == fChar ) dquote = !dquote;

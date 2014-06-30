@@ -1,12 +1,9 @@
 package com.laazer.lol.champion;
 
+import java.util.HashMap;
 import java.util.Map;
-
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
-import com.json.parsers.JSONParser;
+import com.google.gson.reflect.TypeToken;
 import com.laazer.common.Box;
 import com.laazer.lol.LoLObject;
 
@@ -18,7 +15,7 @@ public class LoLPassive extends LoLObject{
     
     public static Box<LoLPassive> genPassive(String jobj) {
         try {
-            Map<String, Object> lobj = new JSONParser().parseJson(jobj);
+            Map<String, Object> lobj =  new Gson().fromJson(jobj, new TypeToken<HashMap<String, Object>>() {}.getType());
             LoLPassive pas = new LoLPassive();
             pas.description = lobj.get("description").toString();
             pas.image = LoLImage.genImage(lobj.get("image").toString());

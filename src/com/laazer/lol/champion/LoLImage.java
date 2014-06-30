@@ -1,7 +1,5 @@
 package com.laazer.lol.champion;
 
-import org.json.JSONObject;
-
 import com.google.gson.Gson;
 import com.laazer.lol.LoLObject;
 
@@ -9,7 +7,7 @@ public class LoLImage extends LoLObject {
     private String full, group, sprite;
     private int h, w, x, y;
     
-    public static LoLImage genImage(JSONObject jobj) {
+    public static LoLImage genImage(Object jobj) {
         return genImage(jobj.toString());
     }
     

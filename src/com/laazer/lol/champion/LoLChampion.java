@@ -61,7 +61,7 @@ public class LoLChampion extends LoLObject{
         
     private static LoLChampion genSimpleChamp(Map<String, Object> cobj) {
             LoLChampion champ = new LoLChampion();
-            champ.id = Integer.parseInt(cobj.get("id").toString());
+            champ.id = Math.round(Float.parseFloat(cobj.get("id").toString()));
             champ.key = cobj.get("key").toString(); 
             champ.name = cobj.get("name").toString();
             champ.title = cobj.get("title").toString();
