@@ -46,11 +46,10 @@ public class RiotForge {
      * A Complex <code>LoLChampion</code> has all fields of a Simple <code>LoLChampion</code>
      * as well as any <code>LoLChampVal</code>s added.
      * @param id a given <code>int</code>
-     * @param args any number of <code>LoLChampVal</code>s
      * @return  A <code>Box</code> that contains either a <code>LoLChampion</code>
      * or is Empty
      */
     public Box<LoLChampion> genCompleteChamp(int id) {
-        return this.genComplexChamp(id, LoLChampVal.ALL);
+        return LoLChampion.genCompleteChamp(id, key);
     }
 }

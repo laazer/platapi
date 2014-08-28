@@ -3,25 +3,29 @@ package com.laazer.lol.tests;
 import static org.junit.Assert.*;
 import org.junit.Test;
 import com.laazer.common.Box;
-import com.laazer.lol.RiotForge;
 import com.laazer.lol.champion.LoLChampion;
+import com.laazer.common.FileUtils;
+
+import java.nio.charset.Charset;
+import java.nio.charset.StandardCharsets;
+import java.nio.file.Files;
 
 public class LoLChampionSpec {
 
-    String key = "f123e66a-3511-4219-bd29-71d8e315e603";
-    RiotForge forge = new RiotForge(key);
+    String resPath = this.getClass().getResource("/champRes").getPath();
     Box<LoLChampion> garen;
     Box<LoLChampion> soraka;
     Box<LoLChampion> nidalee;
     
     public void initGaren() {
-        garen = forge.genCompleteChamp(86);
+        String js = FileUtils.safeReadFile(resPath + "/garenReg.txt", StandardCharsets.UTF_8).get();
+        garen = LoLChampion.genCustomChamp(js);
     }
     public void initSoraka() {
-        soraka = forge.genCompleteChamp(16);
+        soraka = LoLChampion.genCustomChamp(FileUtils.safeReadFile(resPath + "/rakaReg.txt", Charset.defaultCharset()).get());
     }
     public void initNid() {
-        nidalee = forge.genCompleteChamp(76);
+        nidalee = LoLChampion.genCustomChamp(FileUtils.safeReadFile(resPath + "/nidReg.txt", Charset.defaultCharset()).get());
     }
     
     @Test

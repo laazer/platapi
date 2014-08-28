@@ -28,10 +28,30 @@ public class LoLChampion extends LoLObject{
     private Box<List<Box<LoLChampSpell>>> spells;
     private Box<LoLStats> stats;
     LoLChampion() {}
-    
+
+    /**
+     * Allows for the creation of custom champions using Json Strings
+     * @param jsonString a given Json String
+     * @return a {@code Box} filled with a {@code LoLChampion} if creation was successful and an empty Box otherwise.
+     */
+    public static Box<LoLChampion> genCustomChamp(String jsonString) {
+        Map<String, Object> map = new Gson().fromJson(jsonString, new TypeToken<HashMap<String, Object>>() {}.getType());
+        LoLChampion champ = genSimpleChamp(map);
+        setFields(champ, map, LoLChampVal.ALL);
+        return Box.fill(champ);
+    }
+
+    public static Box<LoLChampion> genCompleteChamp(int id, String key) {
+        Map<String, Object> mobj = genJsonMap(id, key, LoLChampVal.ALL);
+        LoLChampion champ = genSimpleChamp(mobj);
+        setFields(champ, mobj, LoLChampVal.ALL);
+        return Box.fill(champ);
+    }
+
     public static Box<LoLChampion> genComplexChamp(int id, String key, LoLChampVal... args) {
         Map<String, Object> mobj = genJsonMap(id, key, args);
         LoLChampion champ = genSimpleChamp(mobj);
+
         try {
             for(int i = 0; i < args.length; i++) {
                 setFields(champ, mobj, args[i]);
@@ -73,42 +93,71 @@ public class LoLChampion extends LoLObject{
             switch(arg) {
             case BLURB: {
                 champ.blurb = Box.fill(obj.get(arg.toString())).map(Functions.toString);
+                break;
             }
             case LORE:  {
                 champ.lore = Box.fill(obj.get(arg.toString())).map(Functions.toString);
+                break;
             }
             case PARTYPE: {
                 champ.partype = Box.fill(obj.get(arg.toString()).toString());
+                break;
             }
             case ALLY_TIPS: {
                 champ.allyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+                break;
             }
             case ENEMY_TIPS: {
                 champ.enemyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+                break;
             }
             case TAGS: {
                 champ.tags = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), Functions.toString));
+                break;
             }
             case IMAGE: {
-                champ.image = Box.fill(LoLImage.genImage(obj.get(arg.toString()).toString())); 
+                champ.image = Box.fill(LoLImage.genImage(obj.get(arg.toString()).toString()));
+                break;
             }
             case INFO: {
                 champ.info = Box.fill(LoLInfo.genLoLInfo(obj.get(arg.toString()).toString()));
+                break;
             }
             case PASSIVE: {
                 champ.passive = LoLPassive.genPassive(obj.get(arg.toString()).toString());
+                break;
             }
             case RECOMMENDED: {
                 champ.recommended = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toRecommended));
+                break;
             }
             case SKINS: {
                 champ.skins = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toSkin));
+                break;
             }
             case SPELLS: {
                 champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toChampSpell));
+                break;
             }
             case STATS: {
                 champ.stats = Box.fill(LoLStats.genLoLStats(obj.get(arg.toString()).toString()));
+                break;
+            }
+            case ALL: {
+                champ.blurb = Box.fill(obj.get(LoLChampVal.BLURB.toString())).map(Functions.toString);
+                champ.lore = Box.fill(obj.get(LoLChampVal.LORE.toString())).map(Functions.toString);
+                champ.partype = Box.fill(obj.get(LoLChampVal.PARTYPE.toString()).toString());
+                champ.allyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.ALLY_TIPS.toString())), Functions.toString));
+                champ.enemyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.ENEMY_TIPS.toString())), Functions.toString));
+                champ.tags = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.TAGS.toString())), Functions.toString));
+                champ.image = Box.fill(LoLImage.genImage(obj.get(LoLChampVal.IMAGE.toString()).toString()));
+                champ.info = Box.fill(LoLInfo.genLoLInfo(obj.get(LoLChampVal.INFO.toString()).toString()));
+                champ.passive = LoLPassive.genPassive(obj.get(LoLChampVal.PASSIVE.toString()).toString());
+                champ.recommended = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.RECOMMENDED.toString())), LoLUtils.toRecommended));
+                champ.skins = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.SKINS.toString())), LoLUtils.toSkin));
+                champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toChampSpell));
+                champ.stats = Box.fill(LoLStats.genLoLStats(obj.get(LoLChampVal.STATS.toString()).toString()));
+                break;
             }
         }
             

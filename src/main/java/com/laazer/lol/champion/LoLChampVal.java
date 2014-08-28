@@ -9,9 +9,9 @@ public enum LoLChampVal {
         switch(this) {
             case BLURB: return "blurb"; 
             case LORE: return "lore"; 
-            case PARTYPE: return "partupe"; 
+            case PARTYPE: return "partype";
             case ALLY_TIPS: return "allytips"; 
-            case ENEMY_TIPS: return "ENEMY_TIPS"; 
+            case ENEMY_TIPS: return "enemytips";
             case TAGS: return "tags"; 
             case IMAGE: return "image"; 
             case INFO: return "info";

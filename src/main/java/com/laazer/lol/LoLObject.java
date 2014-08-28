@@ -5,7 +5,6 @@ import com.google.gson.Gson;
 
 public abstract class LoLObject {
     protected final static String URL = "https://prod.api.pvp.net/api/lol/";
-    protected final static String KEY = "api_key=f123e66a-3511-4219-bd29-71d8e315e603";
     
     public LoLObject genLoLObject(Object obj) {
         Gson gson = new Gson();
