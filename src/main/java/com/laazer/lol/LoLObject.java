@@ -6,7 +6,7 @@ import com.google.gson.Gson;
 public abstract class LoLObject {
     protected final static String URL = "https://prod.api.pvp.net/api/lol/";
     
-    public LoLObject genLoLObject(Object obj) {
+    public LoLObject generate(Object obj) {
         Gson gson = new Gson();
         return gson.fromJson(obj.toString(), this.getClass());
     }
@@ -15,13 +15,13 @@ public abstract class LoLObject {
 }
 
 @SuppressWarnings("serial")
-class BadLoLConversionExecption extends Exception
+class BadLoLConversionException extends Exception
 {
       //Parameterless Constructor
-      public BadLoLConversionExecption() {}
+      public BadLoLConversionException() {}
 
       //Constructor that accepts a message
-      public BadLoLConversionExecption(String message)
+      public BadLoLConversionException(String message)
       {
          super(message);
       }

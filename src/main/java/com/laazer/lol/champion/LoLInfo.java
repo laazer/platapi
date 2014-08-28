@@ -6,9 +6,14 @@ import com.laazer.lol.LoLObject;
 public class LoLInfo extends LoLObject{
     private int attack, defense, difficulty, magic;
     
-    public static LoLInfo genLoLInfo(String jobj) {
+    public static LoLInfo genLoLInfo(String json) {
         Gson gson = new Gson();
-        return gson.fromJson(jobj, new LoLInfo().getClass());
+        return gson.fromJson(json, new LoLInfo().getClass());
+    }
+
+    public static LoLInfo generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLInfo().getClass());
     }
 
     public int getAttack() {return attack;}

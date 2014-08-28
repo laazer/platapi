@@ -124,7 +124,7 @@ public class LoLChampion extends LoLObject{
                 break;
             }
             case PASSIVE: {
-                champ.passive = LoLPassive.genPassive(obj.get(arg.toString()).toString());
+                champ.passive = LoLPassive.genPassive((Map<String, Object>)obj.get(arg.toString()));
                 break;
             }
             case RECOMMENDED: {
@@ -144,6 +144,7 @@ public class LoLChampion extends LoLObject{
                 break;
             }
             case ALL: {
+                Gson gson = new Gson();
                 champ.blurb = Box.fill(obj.get(LoLChampVal.BLURB.toString())).map(Functions.toString);
                 champ.lore = Box.fill(obj.get(LoLChampVal.LORE.toString())).map(Functions.toString);
                 champ.partype = Box.fill(obj.get(LoLChampVal.PARTYPE.toString()).toString());
@@ -151,8 +152,8 @@ public class LoLChampion extends LoLObject{
                 champ.enemyTips = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.ENEMY_TIPS.toString())), Functions.toString));
                 champ.tags = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.TAGS.toString())), Functions.toString));
                 champ.image = Box.fill(LoLImage.genImage(obj.get(LoLChampVal.IMAGE.toString()).toString()));
-                champ.info = Box.fill(LoLInfo.genLoLInfo(obj.get(LoLChampVal.INFO.toString()).toString()));
-                champ.passive = LoLPassive.genPassive(obj.get(LoLChampVal.PASSIVE.toString()).toString());
+                champ.info = Box.fill(LoLInfo.generate(gson.toJson(obj.get(LoLChampVal.INFO.toString()))));
+                champ.passive = Box.fill(LoLPassive.generate(gson.toJson(obj.get(LoLChampVal.PASSIVE.toString()))));
                 champ.recommended = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.RECOMMENDED.toString())), LoLUtils.toRecommended));
                 champ.skins = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.SKINS.toString())), LoLUtils.toSkin));
                 champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toChampSpell));

@@ -13,9 +13,8 @@ public class LoLPassive extends LoLObject{
     private String name, sanitizedDescription;
     public LoLPassive() {}
     
-    public static Box<LoLPassive> genPassive(String jobj) {
+    public static Box<LoLPassive> genPassive(Map<String, Object> lobj) {
         try {
-            Map<String, Object> lobj =  new Gson().fromJson(jobj, new TypeToken<HashMap<String, Object>>() {}.getType());
             LoLPassive pas = new LoLPassive();
             pas.description = lobj.get("description").toString();
             pas.image = LoLImage.genImage(lobj.get("image").toString());
@@ -25,6 +24,11 @@ public class LoLPassive extends LoLObject{
         }catch(IllegalArgumentException e) {
             return Box.EMPTY;
         }
+    }
+
+    public static LoLPassive generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLPassive().getClass());
     }
 
     public String getDescription() { return description;}

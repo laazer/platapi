@@ -1,12 +1,14 @@
 package com.laazer.lol;
 
+import com.google.gson.Gson;
 import com.laazer.common.Box;
 import com.laazer.common.UniFunction;
 import com.laazer.common.JSONUtils;
 import com.laazer.lol.champion.*;
 
 public class LoLUtils extends LoLObject{
-    
+
+    private static Gson gson = new Gson();
     public static UniFunction<Object, LoLRecommended> toRecommended = new ToRecommended();
     public static UniFunction<Object, LoLSkin> toSkin = new ToSkin();
     public static UniFunction<Object, LoLSpellVars> toSpellVar = new ToSpellVars();
@@ -22,13 +24,13 @@ public class LoLUtils extends LoLObject{
     
     private static class ToSkin implements UniFunction<Object, LoLSkin> {
         public LoLSkin apply(Object value) {
-            return LoLSkin.genLoLSkin(value.toString());
+            return LoLSkin.generate(gson.toJson(value));
         }
     }
     
     private static class ToSpellVars implements UniFunction<Object, LoLSpellVars> {
         public LoLSpellVars apply(Object value) {
-            return LoLSpellVars.genSpellVars(value.toString());
+            return LoLSpellVars.generate(gson.toJson(value));
         }
     }
     

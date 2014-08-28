@@ -21,7 +21,7 @@ public class LoLChampSpell extends LoLObject{
     private LoLLevelTip levelTip;
     private int maxrank;
     private String name;
-    private Box<Integer> range;
+    private String range;
     private String rangeBurn, resource, sanitizedDescription, sanitizedTooltip, tooltip;
     private List<LoLSpellVars> vars;
     
@@ -43,7 +43,7 @@ public class LoLChampSpell extends LoLObject{
               cs.levelTip = LoLLevelTip.genLevelTip(lobj.get("leveltip").toString());
               cs.maxrank = Functions.toInt.apply(lobj.get("maxrank"));
               cs.name = lobj.get("name").toString();
-              cs.range = Box.fill(lobj.get("range")).map(Functions.toInt);
+              cs.range = lobj.get("range").toString();
               cs.rangeBurn = lobj.get("rangeburn").toString();
               cs.resource = lobj.get("resources").toString();
               cs.sanitizedDescription = lobj.get("sanatizeddescription").toString();
@@ -54,8 +54,12 @@ public class LoLChampSpell extends LoLObject{
         } catch(IllegalArgumentException e) {
             return Box.EMPTY;
         }
-          
       }
+
+    public static LoLChampSpell generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLChampSpell().getClass());
+    }
 
     public List<LoLImage> getAltImages() {return altImages;}
     public List<Double> getCooldown() { return cooldown;}
@@ -70,7 +74,7 @@ public class LoLChampSpell extends LoLObject{
     public LoLLevelTip getLevelTip() {return levelTip;}
     public int getMaxrank() {return maxrank;}
     public String getName() { return name;}
-    public Box<Integer> getRange() {return range;}
+    public String getRange() {return range;}
     public String getRangeBurn() {return rangeBurn;}
     public String getResource() {return resource;}
     public String getSanitizedDescription() {return sanitizedDescription;}

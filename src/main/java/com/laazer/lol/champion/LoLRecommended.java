@@ -16,6 +16,11 @@ public class LoLRecommended extends LoLObject{
         return gson.fromJson(jobj, new LoLRecommended().getClass());
     }
 
+    public static LoLRecommended generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLRecommended().getClass());
+    }
+
     public List<LoLBlock> getBlocks() {return blocks;}
     public String getChampion() {return champion;}
     public String getMap() {return map;}

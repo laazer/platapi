@@ -14,5 +14,10 @@ public class LoLSpellVars extends LoLObject{
         Gson gson = new Gson();
         return gson.fromJson(jobj, new LoLSpellVars().getClass());
     }
+
+    public static LoLSpellVars generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLSpellVars().getClass());
+    }
     
 }
