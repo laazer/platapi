@@ -25,7 +25,7 @@ public class LoLChampion extends LoLObject{
     private Box<LoLPassive> passive;
     private Box<List<LoLRecommended>> recommended;
     private Box<List<LoLSkin>> skins;
-    private Box<List<Box<LoLChampSpell>>> spells;
+    private Box<List<LoLChampSpell>> spells;
     private Box<LoLStats> stats;
     LoLChampion() {}
 
@@ -183,7 +183,7 @@ public class LoLChampion extends LoLObject{
     public Box<LoLPassive> getPassive() {return passive;}
     public Box<List<LoLRecommended>> getRecommended() {return recommended;}
     public Box<List<LoLSkin>> getSkins() {return skins;}
-    public Box<List<Box<LoLChampSpell>>> getSpells() {return spells;}
+    public Box<List<LoLChampSpell>> getSpells() {return spells;}
     public Box<LoLStats> getStats() {return stats;}
     
     //TODO make a quick and dirty method for freeToPlay (joking about the dirty part)

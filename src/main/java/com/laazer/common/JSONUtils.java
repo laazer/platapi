@@ -5,6 +5,7 @@ import java.util.List;
 import com.google.gson.JsonArray;
 import com.google.gson.JsonObject;
 import com.oracle.javafx.jmx.json.JSONException;
+import com.google.common.base.Function;
 
 public class JSONUtils {
     
