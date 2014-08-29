@@ -3,6 +3,8 @@ package com.laazer.common;
 import java.util.Collections;
 import java.util.List;
 import java.util.Set;
+import com.google.common.base.Function;
+import com.google.common.base.Optional;
 
 /**
  * 
@@ -34,7 +36,7 @@ public abstract class Box <T> {
      * @return a <code>Box</code> containing a mapped version of what was previously inside.
      * if the <code>Box</code> is empty the box will remain empty.
      */
-    public <B> Box<B> map(UniFunction<T, B> f){return Box.empty();}
+    public <B> Box<B> map(Function<T, B> f){return Box.empty();}
     /**
      * Retrieves what's inside this <code>Box</code>
      * @return whatever is inside this <code>Box</code>
@@ -57,7 +59,7 @@ public abstract class Box <T> {
     /** Trys to get what's in inside the box but if the box
      * is empty returns the default object. this will
      * never change the return type.
-     * @param o default object
+     * @param t default object
      */
     public T getOrElseKeepType(T t) {
         if(this.isFull()) return this.get();
@@ -94,6 +96,12 @@ public abstract class Box <T> {
         return Collections.EMPTY_LIST;
     }
 
+    /**
+     * converts this {@code Box} into a google {@code Optional}
+     * @return an {@code Optional} representation of this {@code Box}
+     */
+    public Optional<T> tOptional() {return Optional.absent();}
+
 }
 
 /**
@@ -108,7 +116,7 @@ class Full<T> extends Box<T> {
     @Override
     public boolean isFull() {return true;}
     @Override
-    public <B> Box<B> map(UniFunction<T, B> f) {
+    public <B> Box<B> map(Function<T, B> f) {
         return new Full<B>(f.apply(this.cat));
     }
     @Override
@@ -122,6 +130,8 @@ class Full<T> extends Box<T> {
     public List<T> toList () {
         return Collections.singletonList(cat);
     }
+    @Override
+    public Optional<T> tOptional() {return Optional.of(cat);}
     
 }
 

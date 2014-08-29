@@ -15,6 +15,11 @@ public class LoLImage extends LoLObject {
         Gson gson = new Gson();
         return gson.fromJson(jobj, new LoLImage().getClass());
     }
+
+    public static LoLImage generate(String json) {
+        Gson gson = new Gson();
+        return gson.fromJson(json, new LoLImage().getClass());
+    }
     
     @Override
     public String toString() {

@@ -156,7 +156,7 @@ public class LoLChampion extends LoLObject{
                 champ.passive = Box.fill(LoLPassive.generate(gson.toJson(obj.get(LoLChampVal.PASSIVE.toString()))));
                 champ.recommended = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.RECOMMENDED.toString())), LoLUtils.toRecommended));
                 champ.skins = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.SKINS.toString())), LoLUtils.toSkin));
-                champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(arg.toString())), LoLUtils.toChampSpell));
+                champ.spells = Box.fill(ListUtils.map(ListUtils.toList.apply(obj.get(LoLChampVal.SPELLS.toString())), LoLUtils.toChampSpell));
                 champ.stats = Box.fill(LoLStats.genLoLStats(obj.get(LoLChampVal.STATS.toString()).toString()));
                 break;
             }

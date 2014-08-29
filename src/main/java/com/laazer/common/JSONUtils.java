@@ -8,7 +8,7 @@ import com.oracle.javafx.jmx.json.JSONException;
 
 public class JSONUtils {
     
-    public static UniFunction<Object, JsonObject> toJSONObject = new ToJSONObject();
+    public static Function<Object, JsonObject> toJSONObject = new ToJSONObject();
     
     public static List<Object> jArrayToList(JsonArray jarray) throws JSONException {
         List<Object> jlist = new ArrayList<Object>();
@@ -18,18 +18,18 @@ public class JSONUtils {
         return jlist;        
     }
     
-    public static <R> List<R> mappedList(JsonArray jarray, UniFunction<Object, R> f) throws JSONException {
+    public static <R> List<R> mappedList(JsonArray jarray, Function<Object, R> f) throws JSONException {
         return ListUtils.map(JSONUtils.jArrayToList(jarray), f);
     }
     
-    private static class ToJSONObject implements UniFunction<Object, JsonObject> {
+    private static class ToJSONObject implements Function<Object, JsonObject> {
         @Override
         public JsonObject apply(Object value) {
             return (JsonObject) value;
         }
     }
 
-    public static <T> Box<T> safeUnpack(JsonObject jobj, String name, UniFunction<Object, T> f) {
+    public static <T> Box<T> safeUnpack(JsonObject jobj, String name, Function<Object, T> f) {
         try {
             return new Full(f.apply((Object) jobj.get(name)));
         }catch(Exception e) {

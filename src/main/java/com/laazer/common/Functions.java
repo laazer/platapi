@@ -2,6 +2,7 @@ package com.laazer.common;
 
 import java.util.ArrayList;
 import java.util.List;
+import com.google.common.base.Function;
 
 /**
  * Class containing common functions
@@ -10,32 +11,32 @@ import java.util.List;
  */
 public class Functions {
 
-    public static UniFunction<Object, String> toString = new ToString();
-    private static class ToString implements UniFunction<Object, String> {
+    public static Function<Object, String> toString = new ToString();
+    private static class ToString implements Function<Object, String> {
         @Override
         public String apply(Object value) {
             return value.toString();
         }
     }
     
-    public static UniFunction<Object, Double> toDouble = new ToDouble();
-    private static class ToDouble implements UniFunction<Object, Double> {
+    public static Function<Object, Double> toDouble = new ToDouble();
+    private static class ToDouble implements Function<Object, Double> {
         @Override
         public Double apply(Object value) {
             return (Double) value;
         }
     }
     
-    public static UniFunction<Object, Integer> toInt = new ToInt();
-    private static class ToInt implements UniFunction<Object, Integer> {
+    public static Function<Object, Integer> toInt = new ToInt();
+    private static class ToInt implements Function<Object, Integer> {
         @Override
         public Integer apply(Object value) {
             return Integer.parseInt(value.toString());
         }
     }
     
-    public static UniFunction<Object, Boolean> toBoolean = new ToBoolean();
-    private static class ToBoolean implements UniFunction<Object, Boolean> {
+    public static Function<Object, Boolean> toBoolean = new ToBoolean();
+    private static class ToBoolean implements Function<Object, Boolean> {
         @Override
         public Boolean apply(Object value) {
             return Boolean.parseBoolean(value.toString());
