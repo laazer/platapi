@@ -51,6 +51,24 @@ public class Functions {
             return result;
         }
     }
+
+    /**
+     * Transforms a {@code Function} into a {@code BinFunction}
+     * @param function a given {@code Function}
+     * @param <X> first input value type
+     * @param <Y> second input value type
+     * @param <Z> function return type
+     * @return a {@code BinFunction} representation of the given {@code Function}
+     */
+    private static <X, Y, Z> BinFunction<X, Y, Z> toBinFunction(Function<X, Function<Y, Z>> function) {
+        class CompFun implements BinFunction<X, Y, Z> {
+            @Override
+            public Z apply(X value1, Y value2) {
+                return function.apply(value1).apply(value2);
+            }
+        }
+        return new CompFun();
+    }
     
     public static BinFunction<Integer, Integer, Integer> add = new Add();
     private static class Add implements BinFunction<Integer, Integer, Integer> {

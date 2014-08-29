@@ -2,17 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="877d3085-420d-4a3b-b8e8-fa23bf6e2308" name="Default" comment="">
-      <change type="DELETED" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/UniFunction.java" afterPath="" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/BinFunction.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/common/BinFunction.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/Box.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/common/Box.java" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/JSONUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/common/JSONUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/common/ListUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/common/ListUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLBlockItem.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLBlockItem.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLChampion.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLChampion.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLImage.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLImage.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/main/java/com/laazer/lol/LoLUtils.java" afterPath="$PROJECT_DIR$/src/main/java/com/laazer/lol/LoLUtils.java" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
     </list>
     <ignored path="platapi.iws" />
     <ignored path=".idea/workspace.xml" />
@@ -53,10 +43,24 @@
       <file leaf-file-name="LoLChampion.java" pinned="false" current="true" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLChampion.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state vertical-scroll-proportion="0.33333334" vertical-offset="1848" max-vertical-offset="2985">
-              <caret line="138" column="54" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
+            <state vertical-scroll-proportion="0.3783784" vertical-offset="1818" max-vertical-offset="2985">
+              <caret line="138" column="53" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="53" />
               <folding>
                 <element signature="imports" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="Functions.java" pinned="false" current="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java">
+          <provider selected="true" editor-type-id="text-editor">
+            <state vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="1200">
+              <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+              <folding>
+                <element signature="imports" expanded="true" />
+                <element signature="e#2230#2231#0" expanded="true" />
+                <element signature="e#2305#2306#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -171,11 +175,11 @@
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLChampion.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/UniFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/Function.java" />
-        <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/BinFunction.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/ListUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/lol/LoLUtils.java" />
         <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/Box.java" />
+        <option value="$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java" />
       </list>
     </option>
   </component>
@@ -435,6 +439,8 @@
     <property name="FullScreen" value="true" />
     <property name="dynamic.classpath" value="false" />
     <property name="ignore_missing_gitignore" value="true" />
+    <property name="OverrideImplement.combined" value="true" />
+    <property name="OverrideImplement.overriding.sorted" value="false" />
   </component>
   <component name="RecentsManager">
     <key name="MoveFile.RECENT_KEYS">
@@ -1006,16 +1012,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.24300441" vertical-offset="0" max-vertical-offset="930">
-          <caret line="11" column="13" selection-start-line="11" selection-start-column="13" selection-end-line="11" selection-end-column="13" />
-          <folding>
-            <element signature="imports" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLRecommended.java">
       <provider selected="true" editor-type-id="text-editor">
         <state vertical-scroll-proportion="0.0" vertical-offset="0" max-vertical-offset="525">
@@ -1044,10 +1040,22 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/common/Functions.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state vertical-scroll-proportion="0.0" vertical-offset="506" max-vertical-offset="1200">
+          <caret line="66" column="38" selection-start-line="66" selection-start-column="38" selection-end-line="66" selection-end-column="38" />
+          <folding>
+            <element signature="imports" expanded="true" />
+            <element signature="e#2230#2231#0" expanded="true" />
+            <element signature="e#2305#2306#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/main/java/com/laazer/lol/champion/LoLChampion.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state vertical-scroll-proportion="0.33333334" vertical-offset="1848" max-vertical-offset="2985">
-          <caret line="138" column="54" selection-start-line="138" selection-start-column="54" selection-end-line="138" selection-end-column="54" />
+        <state vertical-scroll-proportion="0.3783784" vertical-offset="1818" max-vertical-offset="2985">
+          <caret line="138" column="53" selection-start-line="138" selection-start-column="50" selection-end-line="138" selection-end-column="53" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
