@@ -1,4 +1,5 @@
 package com.laazer.lol.champion;
+import java.util.DoubleSummaryStatistics;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -14,14 +15,14 @@ public class LoLChampSpell extends LoLObject{
     private List<LoLImage> altImages;
     private List<Double> cooldown;
     private String coolDownBurn, costBurn, costType, description;
-    private List<List<Integer>> effect;
+    private List<List<Double>> effect;
     private List<String> effectBurn;
     private LoLImage image;
     private String key;
     private LoLLevelTip levelTip;
     private int maxrank;
     private String name;
-    private String range;
+    private Object range;
     private String rangeBurn, resource, sanitizedDescription, sanitizedTooltip, tooltip;
     private List<LoLSpellVars> vars;
     
@@ -36,7 +37,7 @@ public class LoLChampSpell extends LoLObject{
               cs.coolDownBurn = lobj.get("cooldownburn").toString();
               cs.costBurn = lobj.get("costburn").toString();
               cs.description = lobj.get("description").toString();
-              cs.effect = ListUtils.map(ListUtils.toList.apply(lobj.get("effect")), ListUtils.toIntList);
+              cs.effect = ListUtils.map(ListUtils.toList.apply(lobj.get("effect")), ListUtils.toDoubleList);
               cs.effectBurn = ListUtils.toStringList.apply(lobj.get("effectburn"));
               cs.image = LoLImage.genImage(lobj.get("image").toString());
               cs.key = lobj.get("key").toString();
@@ -67,14 +68,14 @@ public class LoLChampSpell extends LoLObject{
     public String getCostBurn() {return costBurn;}
     public String getCostType() {return costType;}
     public String getDescription() {return description;}
-    public List<List<Integer>> getEffect() {return effect;}
+    public List<List<Double>> getEffect() {return effect;}
     public List<String> getEffectBurn() {return effectBurn;}
     public LoLImage getImage() {return image;}
     public String getKey() {return key;}
     public LoLLevelTip getLevelTip() {return levelTip;}
     public int getMaxrank() {return maxrank;}
     public String getName() { return name;}
-    public String getRange() {return range;}
+    public Object getRange() {return range;}
     public String getRangeBurn() {return rangeBurn;}
     public String getResource() {return resource;}
     public String getSanitizedDescription() {return sanitizedDescription;}

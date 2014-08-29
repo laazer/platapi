@@ -63,4 +63,12 @@ public class ListUtils {
             return ListUtils.map(ListUtils.toList.apply(value), Functions.toInt);
         }
     }
+
+    public static Function<Object, List<Double>> toDoubleList = new ToDoubleList();
+    private static class ToDoubleList implements Function<Object, List<Double>> {
+        @Override
+        public List<Double> apply(Object value) {
+            return ListUtils.map(ListUtils.toList.apply(value), Functions.toDouble);
+        }
+    }
 }
