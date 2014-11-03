@@ -35,6 +35,8 @@ public class LoLChampionSpec {
         assertTrue("garen's name is Garen", garen.get().getName().equals("Garen"));
         assertTrue("garen has spells (who knew)", garen.get().getSpells().isFull());
         assertTrue("garen has 4 spells", garen.get().getSpells().get().size() == 4);
+        assertTrue("check that garen's self cast is empty", garen.get().getSpells().get().get(1).getRange().isEmpty());
+        assertTrue("check that garen's ult cast is empty", garen.get().getSpells().get().get(3).getRange().isFull());
     }
     
     @Test

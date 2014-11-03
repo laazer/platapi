@@ -102,6 +102,10 @@ public abstract class Box <T> {
      */
     public Optional<T> tOptional() {return Optional.absent();}
 
+    @Override
+    public String toString() {
+        return "Box[]";
+    }
 }
 
 /**
@@ -132,6 +136,25 @@ class Full<T> extends Box<T> {
     }
     @Override
     public Optional<T> tOptional() {return Optional.of(cat);}
+
+    @Override
+    public boolean equals(Object o) {
+        if(o == null) { return false;}
+        if(o instanceof Full) {
+            return this.get().equals(((Full) o).get());
+        }
+        return false;
+    }
+
+    @Override
+    public int hashCode() {
+        return 42 * this.get().hashCode();
+    }
+
+    @Override
+    public String toString() {
+        return "Box[" + this.get().toString() + "]";
+    }
     
 }
 

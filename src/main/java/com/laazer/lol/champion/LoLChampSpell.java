@@ -27,35 +27,6 @@ public class LoLChampSpell extends LoLObject{
     private List<LoLSpellVars> vars;
     
     public LoLChampSpell() {}
-    
-    public static Box<LoLChampSpell> genChampSpell(String obj) {
-        try {
-              Map<String, Object> lobj = new Gson().fromJson(obj, new TypeToken<HashMap<String, Object>>(){}.getType());
-              LoLChampSpell cs = new LoLChampSpell();
-              cs.altImages = ListUtils.map(ListUtils.toList.apply(lobj.get("altimages")), LoLUtils.toImage);
-              cs.cooldown = ListUtils.map(ListUtils.toList.apply(("cooldown")), Functions.toDouble);
-              cs.coolDownBurn = lobj.get("cooldownburn").toString();
-              cs.costBurn = lobj.get("costburn").toString();
-              cs.description = lobj.get("description").toString();
-              cs.effect = ListUtils.map(ListUtils.toList.apply(lobj.get("effect")), ListUtils.toDoubleList);
-              cs.effectBurn = ListUtils.toStringList.apply(lobj.get("effectburn"));
-              cs.image = LoLImage.genImage(lobj.get("image").toString());
-              cs.key = lobj.get("key").toString();
-              cs.levelTip = LoLLevelTip.genLevelTip(lobj.get("leveltip").toString());
-              cs.maxrank = Functions.toInt.apply(lobj.get("maxrank"));
-              cs.name = lobj.get("name").toString();
-              cs.range = lobj.get("range").toString();
-              cs.rangeBurn = lobj.get("rangeburn").toString();
-              cs.resource = lobj.get("resources").toString();
-              cs.sanitizedDescription = lobj.get("sanatizeddescription").toString();
-              cs.sanitizedTooltip = lobj.get("sanatizedtooltip").toString();
-              cs.tooltip = lobj.get("tooltip").toString();
-              cs.vars = ListUtils.map(ListUtils.toList.apply(lobj.get("vars")), LoLUtils.toSpellVar);
-              return Box.fill(cs);
-        } catch(IllegalArgumentException e) {
-            return Box.EMPTY;
-        }
-      }
 
     public static LoLChampSpell generate(String json) {
         Gson gson = new Gson();
@@ -75,13 +46,23 @@ public class LoLChampSpell extends LoLObject{
     public LoLLevelTip getLevelTip() {return levelTip;}
     public int getMaxrank() {return maxrank;}
     public String getName() { return name;}
-    public Object getRange() {return range;}
+    public Box<List<Integer>> getRange() {
+        return toRange(this.range);
+    }
     public String getRangeBurn() {return rangeBurn;}
     public String getResource() {return resource;}
     public String getSanitizedDescription() {return sanitizedDescription;}
     public String getSanitizedTooltip() {return sanitizedTooltip;}
     public String getTooltip() {return tooltip;}
     public List<LoLSpellVars> getVars() {return vars;}
-    
+
+    private static Box<List<Integer>> toRange(Object range) {
+        try {
+           return Box.fill(ListUtils.toIntList.apply(range));
+        } catch (Exception e) {
+            return Box.EMPTY;
+        }
+    }
+
 }
 
